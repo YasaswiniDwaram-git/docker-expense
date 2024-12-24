@@ -1,2 +1,3 @@
 FROM nginx
-COPY index.html /usr/share/nginx/html/index.html
+RUN rm -rf /usr/share/nginx/html/*
+COPY code /usr/share/nginx/html/
