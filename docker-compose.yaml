@@ -1,0 +1,23 @@
+network:
+  expense
+volumes:
+  mysql:
+services:
+  mysql:
+    images: yashdwar/mysql:v1
+    container_name: mysql
+    volumes: 
+      - mysql:/var/lib/mysql
+  backend:
+    images: yashdwar/backend:v1
+    container_name: backend
+    command: sh -c "sleep 5 && /opt/server/index.js"
+    depends_on: 
+      - mysql
+  frontend:
+    images: yashdwar/frontend:v1
+    container_name: frontend
+    ports: 
+      - 80:80
+    depends_on: 
+      - backend
